@@ -1,25 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+/** @format */
 
-function App() {
+import { useState } from "react";
+
+export default function App() {
+  const [position, setPosition] = useState({
+    x: 0,
+    y: 0,
+  });
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div
+      onPointerMove={(e) => {
+        setPosition({
+          x: e.clientX,
+          y: e.clientY,
+        });
+      }}
+      style={{
+        position: "relative",
+        width: "100vw",
+        height: "100vh",
+        cursor: "none",
+      }}>
+      <div
+        style={{
+          position: "absolute",
+          backgroundImage: `url(go-logo.svg)`,
+          backgroundSize: "contain",
+          width: "12.8px",
+          height: "17.4px",
+          pointerEvents: "none",
+          transform: `translate(${position.x - 6.4}px, ${position.y - 8.7}px)`, // Center the pointer on the pointer position
+          zIndex: 9999,
+        }}
+      />
     </div>
   );
 }
-
-export default App;
